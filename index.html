@@ -1,70 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript</title>
+    <title>Verificação de Idade</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             margin-top: 50px;
-            background-color: bisque;
         }
-        input, button {
+
+        input,
+        button {
             margin: 10px;
             padding: 10px;
         }
-        .na{
-            text-align: center;
+
+        .maior {
+            color: blue;
+        }
+
+        .menor {
+            color: red;
         }
     </style>
 </head>
 
 <body>
-    <h1 class="na">sobre você</h1>
-    <label>Informe seu nome</label>
-    <input type="text" placeholder="Ex: Maria" id="nome" /><br>
-    
-    <label>Informe sua idade</label>
-    <input type="text" placeholder="Ex: 18" id="idade" /><br>
-
-    <button onclick="greeting()">Verificar</button>
-
-    <p id="mensagem"></p>
-
-    <hr />
+    <h2>Verificação de idade</h2>
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" placeholder="Digite seu nome">
+    <br>
+    <label for="idade">Idade:</label>
+    <input type="number" id="idade" placeholder="Digite sua idade">
+    <br>
+    <button onclick="verificarIdade()">Verificar</button>
+    <h3 id="resultado"></h3>
 
     <script>
-        function greeting() {
-            var nome = document.getElementById("nome").value.trim();
-            var idade = document.getElementById("idade").value.trim();
-            var mensagem = document.getElementById("mensagem");
+        function verificarIdade() {
+            var nomeDigitado = document.getElementById('nome').value;
+            var idadeDigitada = document.getElementById('idade').value;
+            var resultado = document.getElementById('resultado');
 
-            if (nome === "") {
-                alert("O nome precisa ser informado");
-                document.getElementById("nome").focus();
+            if (nomeDigitado.trim() === '' || idadeDigitada.trim() === '') {
+                resultado.textContent = 'Por favor, preencha todos os campos.';
+                resultado.className = '';
                 return;
             }
 
-            if (idade === "") {
-                alert("A idade precisa ser informada");
-                document.getElementById("idade").focus();
+            var idade = parseInt(idadeDigitada);
+
+            if (isNaN(idade) || idade < 0) {
+                resultado.textContent = 'Por favor, insira uma idade válida.';
+                resultado.className = '';
                 return;
             }
 
-            idade = parseInt(idade);
-            if (isNaN(idade)) {
-                alert("Por favor, informe uma idade válida.");
-                document.getElementById("idade").focus();
-                return;
-            }
-
-            if (idade < 18) {
-                mensagem.innerHTML = "Olá " + nome + ", você é menor de idade.";
+            if (idade >= 18) {
+                resultado.textContent = 'Olá, ' + nomeDigitado + '. Você é maior de idade.';
+                resultado.className = 'maior';
             } else {
-                mensagem.innerHTML = "Olá " + nome + ", você é maior de idade.";
+                resultado.textContent = 'Olá, ' + nomeDigitado + '. Você é menor de idade.';
+                resultado.className = 'menor';
             }
         }
     </script>
