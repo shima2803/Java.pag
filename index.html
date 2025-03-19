@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: bisque;
+        }
+        input, button {
+            margin: 10px;
+            padding: 10px;
+        }
+        .na{
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="na">sobre você</h1>
+    <label>Informe seu nome</label>
+    <input type="text" placeholder="Ex: Maria" id="nome" /><br>
+    
+    <label>Informe sua idade</label>
+    <input type="text" placeholder="Ex: 18" id="idade" /><br>
+
+    <button onclick="greeting()">Verificar</button>
+
+    <p id="mensagem"></p>
+
+    <hr />
+
+    <script>
+        function greeting() {
+            var nome = document.getElementById("nome").value.trim();
+            var idade = document.getElementById("idade").value.trim();
+            var mensagem = document.getElementById("mensagem");
+
+            if (nome === "") {
+                alert("O nome precisa ser informado");
+                document.getElementById("nome").focus();
+                return;
+            }
+
+            if (idade === "") {
+                alert("A idade precisa ser informada");
+                document.getElementById("idade").focus();
+                return;
+            }
+
+            idade = parseInt(idade);
+            if (isNaN(idade)) {
+                alert("Por favor, informe uma idade válida.");
+                document.getElementById("idade").focus();
+                return;
+            }
+
+            if (idade < 18) {
+                mensagem.innerHTML = "Olá " + nome + ", você é menor de idade.";
+            } else {
+                mensagem.innerHTML = "Olá " + nome + ", você é maior de idade.";
+            }
+        }
+    </script>
+</body>
+
+</html>
